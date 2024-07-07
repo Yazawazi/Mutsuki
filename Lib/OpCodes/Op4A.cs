@@ -10,7 +10,7 @@ public class Op4A : IOpControl
         var idx = reader.ReadValue();
         var data = reader.ReadValue();
 
-        return "Bit/Val Get/Set, Val Add With Another Val, Command: 49, Arguments: "
+        return "Bit/Val Get/Set, Val Add With Another Val, Command: 4A, Arguments: "
             + idx
             + ", "
             + data;

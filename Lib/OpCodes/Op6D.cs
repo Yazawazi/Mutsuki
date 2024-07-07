@@ -15,7 +15,7 @@ public class Op6D : IOpControl
                 var idxWait = binaryReader.ReadValue();
                 var idx2Wait = binaryReader.ReadValue();
                 var idx3Wait = binaryReader.ReadValue();
-                return "Mouse Control, Wait Click To Move, Command: 6d 01, Arguments: "
+                return "Mouse Control, Wait Click To Move, Command: 6D 01, Arguments: "
                     + idxWait
                     + ", "
                     + idx2Wait
@@ -25,21 +25,21 @@ public class Op6D : IOpControl
                 var idxMove = binaryReader.ReadValue();
                 var idx2Move = binaryReader.ReadValue();
                 var idx3Move = binaryReader.ReadValue();
-                return "Mouse Control, Move, Command: 6d 02, Arguments: "
+                return "Mouse Control, Move, Command: 6D 02, Arguments: "
                     + idxMove
                     + ", "
                     + idx2Move
                     + ", "
                     + idx3Move;
             case 0x03:
-                return "Mouse Control, Click Data Flush, Command: 6d 03";
+                return "Mouse Control, Click Data Flush, Command: 6D 03";
             case 0x20:
-                return "Mouse Control, Cursor Off, Command: 6d 20";
+                return "Mouse Control, Cursor Off, Command: 6D 20";
             case 0x21:
-                return "Mouse Control, Cursor On, Command: 6d 21";
+                return "Mouse Control, Cursor On, Command: 6D 21";
             default:
                 throw new Exception(
-                    $"Position: {binaryReader.Now()}, Unknown Command: 6d {subCommand:X2}"
+                    $"Position: {binaryReader.Now()}, Unknown Command: 6D {subCommand:X2}"
                 );
         }
     }

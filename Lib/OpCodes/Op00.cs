@@ -11,7 +11,7 @@ public class Op00 : IOpControl
         {
             return "EOF, 00";
         }
-
-        return "Error, May Cause Alignment Issue, Position: " + reader.Now() + ", OpCode: 00";
+        
+        throw new Exception($"Error, May Cause Alignment Issue, Position: " + reader.Now() + ", OpCode: 00");
     }
 }

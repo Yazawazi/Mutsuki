@@ -16,14 +16,14 @@ public class Op5C : IOpControl
         switch (subCommand)
         {
             case 0x01:
-                return "Multiple Variable Set, Val, Command: 5c 01, Arguments: "
+                return "Multiple Variable Set, Val, Command: 5C 01, Arguments: "
                     + idx
                     + ", "
                     + idx2
                     + ", "
                     + data;
             case 0x02:
-                return "Multiple Variable Set, Bit, Command: 5c 02, Arguments: "
+                return "Multiple Variable Set, Bit, Command: 5C 02, Arguments: "
                     + idx
                     + ", "
                     + idx2
@@ -31,7 +31,7 @@ public class Op5C : IOpControl
                     + data;
             default:
                 throw new Exception(
-                    $"Position: {reader.Now()}, Unknown Command: 5c {subCommand:X2}"
+                    $"Position: {reader.Now()}, Unknown Command: 5C {subCommand:X2}"
                 );
         }
     }

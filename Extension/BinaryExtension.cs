@@ -115,15 +115,15 @@ internal static class BinaryExtension
 
         switch (type)
         {
-            case 0x00:
-                return [0x00];
             case 0x28:
                 var boxes = Op15.GetConditionBoxes(reader);
                 var displayedBoxes = string.Join(", ", boxes.Select(x => x.ToString()));
                 return Encoding.ASCII.GetBytes(displayedBoxes);
             case 0xfe
             or 0xff:
-                return reader.ReadCString();
+                var cString = reader.ReadCString();
+                reader.SkipCurrentZero();
+                return cString;
             default:
                 throw new Exception($"Position: {reader.Now()}, Unknown text type: {type:X2}");
         }

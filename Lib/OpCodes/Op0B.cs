@@ -42,7 +42,7 @@ public class Op0B : IOpControl
                     .GetString(binaryReader.ReadCString())
                     .TrimEnd('\0');
                 var idx = binaryReader.ReadValue();
-                return $"Image Load, Load and Display, Command: 0b {subCommand:X2}, Arguments: {text}, {idx}";
+                return $"Image Load, Load and Display, Command: 0B {subCommand:X2}, Arguments: {text}, {idx}";
             case 0x02
             or 0x04
             or 0x06:
@@ -65,16 +65,16 @@ public class Op0B : IOpControl
                 var effectStep = binaryReader.ReadValue();
                 var effectArg5 = binaryReader.ReadValue();
                 var effectArg6 = binaryReader.ReadValue();
-                return $"Image Load, Load and Display with Effect, Command: 0b {subCommand:X2}, Arguments: {text02}, {sx1}, {sy1}, {sx2}, {sy2}, {dx}, {dy}, {stepTime}, {cmd}, {mask}, {effectArg1}, {effectArg2}, {effectArg3}, {effectStep}, {effectArg5}, {effectArg6}";
+                return $"Image Load, Load and Display with Effect, Command: 0B {subCommand:X2}, Arguments: {text02}, {sx1}, {sy1}, {sx2}, {sy2}, {dx}, {dy}, {stepTime}, {cmd}, {mask}, {effectArg1}, {effectArg2}, {effectArg3}, {effectStep}, {effectArg5}, {effectArg6}";
             case 0x08:
-                return "Image Load, Unknown Command, Command: 0b 08";
+                return "Image Load, Unknown Command, Command: 0B 08";
             case 0x09:
                 var text2 = Encoding
                     .GetEncoding(932)
                     .GetString(binaryReader.ReadCString())
                     .TrimEnd('\0');
                 var idx2 = binaryReader.ReadValue();
-                return "Image Load, Load To Buffer, Command: 0b 09, Arguments: "
+                return "Image Load, Load To Buffer, Command: 0B 09, Arguments: "
                     + text2
                     + ", "
                     + idx2;
@@ -85,15 +85,15 @@ public class Op0B : IOpControl
                     .GetString(binaryReader.ReadCString())
                     .TrimEnd('\0');
                 var idx10 = binaryReader.ReadValue();
-                return $"Image Load, Load To Buffer 2, Command: 0b {subCommand:X2}, Arguments: {text10}, {idx10}";
+                return $"Image Load, Load To Buffer 2, Command: 0B {subCommand:X2}, Arguments: {text10}, {idx10}";
             case 0x11:
                 var cachedText = Encoding
                     .GetEncoding(932)
                     .GetString(binaryReader.ReadCString())
                     .TrimEnd('\0');
-                return "Image Load, Load From Cache, Command: 0b 11, Arguments: " + cachedText;
+                return "Image Load, Load From Cache, Command: 0B 11, Arguments: " + cachedText;
             case 0x13:
-                return "Image Load, Unknown Command, Command: 0b 13";
+                return "Image Load, Unknown Command, Command: 0B 13";
             case 0x22:
                 var count = binaryReader.ReadByte();
                 var baseFile = Encoding
@@ -169,7 +169,7 @@ public class Op0B : IOpControl
                             );
                     }
                 }
-                return "Image Load, Composite Group, Command: 0b 22, Arguments: "
+                return "Image Load, Composite Group, Command: 0B 22, Arguments: "
                     + count
                     + ", "
                     + baseFile
@@ -178,13 +178,13 @@ public class Op0B : IOpControl
                     + ", "
                     + string.Join(", ", compositeBoxes);
             case 0x30:
-                return "Image Load, Macro Buffer Clear, Command: 0b 30";
+                return "Image Load, Macro Buffer Clear, Command: 0B 30";
             case 0x31:
                 var marcoIdx = binaryReader.ReadValue();
-                return "Image Load, Delete Macro, Command: 0b 31, Arguments: " + marcoIdx;
+                return "Image Load, Delete Macro, Command: 0B 31, Arguments: " + marcoIdx;
             default:
                 throw new Exception(
-                    $"Position: {binaryReader.Now()}, Unknown Command: 0b {subCommand:X2}"
+                    $"Position: {binaryReader.Now()}, Unknown Command: 0B {subCommand:X2}"
                 );
         }
     }
