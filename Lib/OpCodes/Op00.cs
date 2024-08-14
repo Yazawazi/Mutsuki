@@ -5,7 +5,7 @@ namespace Mutsuki.Lib.OpCodes;
 [OpControl(0x00, "Error and End")]
 public class Op00 : IOpControl
 {
-    public static string ToCommand(BinaryReader reader, Header header)
+    public static string ToCommand(BinaryReader reader, StringMessage message)
     {
         if (reader.Now() == reader.BaseStream.Length)
         {

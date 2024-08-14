@@ -13,7 +13,6 @@ public struct SeenMetadata
 public class SeenParser
 {
     public readonly int FileCount;
-    public readonly SeenMetadata[] FilesMetadata;
     public readonly Dictionary<string, byte[]> Files;
 
     public SeenParser(Stream inputFile)
@@ -34,7 +33,7 @@ public class SeenParser
 
         reader.Skip(12);
 
-        FilesMetadata = new SeenMetadata[FileCount];
+        var filesMetadata = new SeenMetadata[FileCount];
         Files = new Dictionary<string, byte[]>();
 
         for (var i = 0; i < FileCount; i++)
@@ -50,7 +49,7 @@ public class SeenParser
             Files.Add(metadata.Name, reader.ReadBytes(metadata.Size));
             reader.GoTo(nowPosition);
             reader.Skip(8);
-            FilesMetadata[i] = metadata;
+            filesMetadata[i] = metadata;
         }
     }
 }

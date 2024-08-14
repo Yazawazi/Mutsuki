@@ -5,7 +5,7 @@ namespace Mutsuki.Lib.OpCodes;
 
 public interface IOpControl
 {
-    public static abstract string ToCommand(BinaryReader reader, Header header);
+    public static abstract string ToCommand(BinaryReader reader, StringMessage message);
 }
 
 public class OpControl(byte opCode, string description) : Attribute
@@ -35,13 +35,13 @@ public class OpControlManager
         }
     }
 
-    public string ToCommand(byte opCode, BinaryReader reader, Header header)
+    public string ToCommand(byte opCode, BinaryReader reader, StringMessage message)
     {
         var inDict = _opControlTypes.TryGetValue(opCode, out var type);
         if (!inDict)
         {
             throw new Exception($"Position: {reader.Now()}, OpCode {opCode:X2} not found.");
         }
-        return (string)type!.GetMethod("ToCommand")!.Invoke(null, new object[] { reader, header })!;
+        return (string)type!.GetMethod("ToCommand")!.Invoke(null, new object[] { reader, message })!;
     }
 }

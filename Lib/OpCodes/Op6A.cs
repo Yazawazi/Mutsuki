@@ -18,7 +18,7 @@ public struct MultiplePdtEntry
 [OpControl(0x6a, "Multiple PDT Handle")]
 public class Op6A : IOpControl
 {
-    public static string ToCommand(BinaryReader reader, Header header)
+    public static string ToCommand(BinaryReader reader, StringMessage message)
     {
         var subCommand = reader.ReadByte();
 

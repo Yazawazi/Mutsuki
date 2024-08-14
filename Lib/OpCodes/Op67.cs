@@ -5,7 +5,7 @@ namespace Mutsuki.Lib.OpCodes;
 [OpControl(0x67, "Buffer Copy / Display")]
 public class Op67 : IOpControl
 {
-    public static string ToCommand(BinaryReader reader, Header header)
+    public static string ToCommand(BinaryReader reader, StringMessage message)
     {
         var subCommand = reader.ReadByte();
 

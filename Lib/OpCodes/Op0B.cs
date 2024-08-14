@@ -29,7 +29,7 @@ public struct CompositeBox
 [OpControl(0x0B, "Image Load")]
 public class Op0B : IOpControl
 {
-    public static string ToCommand(BinaryReader binaryReader, Header header)
+    public static string ToCommand(BinaryReader binaryReader, StringMessage message)
     {
         var subCommand = binaryReader.ReadByte();
 

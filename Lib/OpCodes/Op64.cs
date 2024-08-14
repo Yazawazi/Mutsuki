@@ -5,7 +5,7 @@ namespace Mutsuki.Lib.OpCodes;
 [OpControl(0x64, "Area Actions")]
 public class Op64 : IOpControl
 {
-    public static string ToCommand(BinaryReader reader, Header header)
+    public static string ToCommand(BinaryReader reader, StringMessage message)
     {
         var subCommand = reader.ReadByte();
 

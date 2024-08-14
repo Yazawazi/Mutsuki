@@ -5,7 +5,7 @@ namespace Mutsuki.Lib.OpCodes;
 [OpControl(0x58, "Select")]
 public class Op58 : IOpControl
 {
-    public static string ToCommand(BinaryReader reader, Header header)
+    public static string ToCommand(BinaryReader reader, StringMessage message)
     {
         var subCommand = reader.ReadByte();
 
@@ -25,6 +25,11 @@ public class Op58 : IOpControl
                         if (text.Any(x => x != 0x00))
                         {
                             selectTexts.Add(text);
+                        }
+
+                        if (text[0] != 0x43)
+                        {
+                            message.AddChineseString(text);
                         }
                     } while (reader.PeekByte() != 0x23);
 

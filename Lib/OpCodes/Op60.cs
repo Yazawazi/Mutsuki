@@ -5,7 +5,7 @@ namespace Mutsuki.Lib.OpCodes;
 [OpControl(0x60, "System Control / Save Load")]
 public class Op60 : IOpControl
 {
-    public static string ToCommand(BinaryReader reader, Header header)
+    public static string ToCommand(BinaryReader reader, StringMessage message)
     {
         var subCommand = reader.ReadByte();
 

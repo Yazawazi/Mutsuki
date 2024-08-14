@@ -5,7 +5,7 @@ namespace Mutsuki.Lib.OpCodes;
 [OpControl(0x13, "Fade In/Fade Out")]
 public class Op13 : IOpControl
 {
-    public static string ToCommand(BinaryReader binaryReader, Header header)
+    public static string ToCommand(BinaryReader binaryReader, StringMessage message)
     {
         var subCommand = binaryReader.ReadByte();
 

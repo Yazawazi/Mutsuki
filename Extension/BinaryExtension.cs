@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using Mutsuki.Lib.OpCodes;
 
@@ -38,7 +39,8 @@ internal static class BinaryExtension
             return;
         reader.ReWind(1);
     }
-
+    
+    [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
     public static void ReWind(this BinaryReader reader, long count)
     {
         reader.BaseStream.Seek(-count, SeekOrigin.Current);
@@ -148,11 +150,6 @@ internal static class BinaryExtension
         returnValue |= number & 15;
         reader.GoTo(cursorPosition + low);
 
-        if ((number & 0x80) != 0)
-        {
-            return new Value { From = ValueFrom.Flag, TrueValue = returnValue };
-        }
-
-        return new Value { From = ValueFrom.Raw, TrueValue = returnValue };
+        return (number & 0x80) != 0 ? new Value { From = ValueFrom.Flag, TrueValue = returnValue } : new Value { From = ValueFrom.Raw, TrueValue = returnValue };
     }
 }

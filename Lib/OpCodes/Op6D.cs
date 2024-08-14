@@ -5,7 +5,7 @@ namespace Mutsuki.Lib.OpCodes;
 [OpControl(0x6D, "Mouse Control")]
 public class Op6D : IOpControl
 {
-    public static string ToCommand(BinaryReader binaryReader, Header header)
+    public static string ToCommand(BinaryReader binaryReader, StringMessage message)
     {
         var subCommand = binaryReader.ReadByte();
 

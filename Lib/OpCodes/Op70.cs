@@ -5,7 +5,7 @@ namespace Mutsuki.Lib.OpCodes;
 [OpControl(0x70, "Window Get/Set")]
 public class Op70 : IOpControl
 {
-    public static string ToCommand(BinaryReader binaryReader, Header header)
+    public static string ToCommand(BinaryReader binaryReader, StringMessage message)
     {
         var subCommand = binaryReader.ReadByte();
 

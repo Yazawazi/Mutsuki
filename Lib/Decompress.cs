@@ -1,7 +1,9 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
 namespace Mutsuki.Lib;
 
+[SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
 public class Decompress
 {
     public static byte[] UnPack(byte[] src)

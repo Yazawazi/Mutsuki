@@ -6,7 +6,7 @@ namespace Mutsuki.Lib.OpCodes;
 [OpControl(0x6C, "Area Data")]
 public class Op6C : IOpControl
 {
-    public static string ToCommand(BinaryReader reader, Header header)
+    public static string ToCommand(BinaryReader reader, StringMessage message)
     {
         var subCommand = reader.ReadByte();
 

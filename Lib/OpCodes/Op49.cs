@@ -5,7 +5,7 @@ namespace Mutsuki.Lib.OpCodes;
 [OpControl(0x49, "Bit/Val Get/Set")]
 public class Op49 : IOpControl
 {
-    public static string ToCommand(BinaryReader reader, Header header)
+    public static string ToCommand(BinaryReader reader, StringMessage message)
     {
         var idx = reader.ReadValue();
         var data = reader.ReadValue();

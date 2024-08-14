@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using Mutsuki.Extension;
 
 namespace Mutsuki.Lib.OpCodes;
@@ -46,7 +47,9 @@ public struct ConditionBox
     }
 }
 
+
 [OpControl(0x15, "Conditional branching (some bad stuff)")]
+[SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
 public class Op15 : IOpControl
 {
     public static List<ConditionBox> GetConditionBoxes(BinaryReader binaryReader)
@@ -135,7 +138,7 @@ public class Op15 : IOpControl
         return conditions;
     }
 
-    public static string ToCommand(BinaryReader binaryReader, Header header)
+    public static string ToCommand(BinaryReader binaryReader, StringMessage message)
     {
         var conditions = GetConditionBoxes(binaryReader);
         var ptr = binaryReader.ReadInt32Le();

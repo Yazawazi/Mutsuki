@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Text;
 using Mutsuki.Lib;
 using ShellProgressBar;
 
@@ -6,8 +7,10 @@ namespace Mutsuki;
 
 using CommandLine;
 
-public abstract class Program
+[SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
+public class Program
 {
+    [SuppressMessage("ReSharper", "ClassNeverInstantiated.Local")]
     private class Options
     {
         [Option('i', "input", Required = true, HelpText = "Input file to be processed.")]
@@ -15,6 +18,9 @@ public abstract class Program
 
         [Option('o', "output", Required = true, HelpText = "Output folder to be written.")]
         public string Output { set; get; } = null!;
+
+        [Option('m', "map", Required = true, HelpText = "Map file to be used.")]
+        public string Map { set; get; } = null!;
     }
 
     private static void Main(string[] args)
@@ -41,6 +47,9 @@ public abstract class Program
                 var parsedFolder = Path.Combine(opts.Output, "03_PARSED");
                 Directory.CreateDirectory(parsedFolder);
 
+                var stringFolder = Path.Combine(opts.Output, "04_STRING");
+                Directory.CreateDirectory(stringFolder);
+
                 var options = new ProgressBarOptions
                 {
                     ProgressBarOnBottom = true,
@@ -48,7 +57,7 @@ public abstract class Program
                 };
 
                 using var progressBar = new ProgressBar(
-                    parser.Files.Count * 3,
+                    parser.FileCount * 3,
                     "Starting",
                     options
                 );
@@ -67,8 +76,14 @@ public abstract class Program
 
                         progressBar.Tick($"Parsing {name}...");
                         var parsedFilePath = Path.Combine(parsedFolder, name);
-                        var parsed = new ScenarioParser(new MemoryStream(decompressed));
+                        var parsed = new ScenarioParser(new MemoryStream(decompressed), opts.Map);
                         File.WriteAllText(parsedFilePath, parsed.FinalContent);
+
+                        if (!string.IsNullOrEmpty(parsed.FinalString))
+                        {
+                            var stringFilePath = Path.Combine(stringFolder, name);
+                            File.WriteAllText(stringFilePath, parsed.FinalString);
+                        }
                     }
                     catch (Exception e)
                     {

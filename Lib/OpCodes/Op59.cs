@@ -2,11 +2,10 @@ using Mutsuki.Extension;
 
 namespace Mutsuki.Lib.OpCodes;
 
-// TEXT NEED
 [OpControl(0x59, "Text Line")]
 public class Op59 : IOpControl
 {
-    public static string ToCommand(BinaryReader reader, Header header)
+    public static string ToCommand(BinaryReader reader, StringMessage message)
     {
         var subCommand = reader.ReadByte();
         var idx = reader.ReadValue();
@@ -15,6 +14,7 @@ public class Op59 : IOpControl
         {
             case 0x01:
                 var text = reader.ReadCString();
+                message.AddShiftJISString(text);
                 return "Text Line, Text Set, Command: 59, Arguments: "
                     + idx
                     + ", "

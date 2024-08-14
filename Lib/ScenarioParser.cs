@@ -77,18 +77,20 @@ public class ScenarioParser
 {
     private readonly BinaryReader _reader;
     private bool _isParsedHeader;
-    private readonly Header _header;
     private readonly OpControlManager _opControlManager = new OpControlManager();
 
     public readonly string FinalContent;
+    public readonly string FinalString;
 
-    public ScenarioParser(Stream inputFile)
+    public ScenarioParser(Stream inputFile, String mapFile)
     {
         _reader = new BinaryReader(inputFile);
-        _header = ParseHeader();
-        var commands = ParseBody();
+        var header = ParseHeader();
+        var stringMessage = new StringMessage(mapFile);
+        var commands = ParseBody(stringMessage);
 
-        FinalContent = _header.ToString() + "\n" + string.Join("\n", commands);
+        FinalContent = header.ToString() + "\n" + string.Join("\n", commands);
+        FinalString = stringMessage.ToString();
     }
 
     private Header ParseHeader()
@@ -177,7 +179,7 @@ public class ScenarioParser
         };
     }
 
-    private List<string> ParseBody()
+    private List<string> ParseBody(StringMessage stringMessage)
     {
         if (!_isParsedHeader)
         {
@@ -191,7 +193,7 @@ public class ScenarioParser
         while (_reader.Now() < _reader.BaseStream.Length)
         {
             var opCode = _reader.ReadByte();
-            var command = _opControlManager.ToCommand(opCode, _reader, _header);
+            var command = _opControlManager.ToCommand(opCode, _reader, stringMessage);
             // Console.WriteLine(command);
             commands.Add(command);
         }

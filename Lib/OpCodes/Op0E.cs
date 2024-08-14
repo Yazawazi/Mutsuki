@@ -6,7 +6,7 @@ namespace Mutsuki.Lib.OpCodes;
 [OpControl(0x0e, "Sound Play")]
 public class Op0E : IOpControl
 {
-    public static string ToCommand(BinaryReader reader, Header header)
+    public static string ToCommand(BinaryReader reader, StringMessage message)
     {
         var subCommand = reader.ReadByte();
 
